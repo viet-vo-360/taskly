@@ -11,11 +11,13 @@ Taskly is a simple task management web application designed to help users create
 ## Tech Stack  
 ### Frontend  
 - HTML, CSS, JavaScript  
-- [SCSS (Sass)](https://sass-lang.com/) for styling  
+- [SCSS (Sass)](https://sass-lang.com/) for styling
+- [JestJs](https://jestjs.io/) for javascript unit testing
 
 ### Backend  
 - [.NET Core MVC](https://learn.microsoft.com/vi-vn/aspnet/core/tutorials/first-mvc-app/start-mvc?view=aspnetcore-9.0&tabs=visual-studio)  
 - [.NET Core API](https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-9.0&tabs=visual-studio)  
+- [Xunit](https://xunit.net/) for unit testing
 
 ### Database  
 - [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server)  
