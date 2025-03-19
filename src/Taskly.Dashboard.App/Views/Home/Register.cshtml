@@ -1,0 +1,83 @@
+﻿@model Taskly.Users.Models.User;
+
+@{
+    ViewData["Title"] = "Register";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/register.css" asp-append-version="true" />
+</head>
+<body>
+    <h1>SIGN UP</h1>
+    <form asp-action="Register" method="post">
+
+        <div class="form-group">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-control" required />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Password">Password</label>
+            <input asp-for="Password" type="password" class="form-control" id="passwordInput"
+                   onfocus="showMessage()" oninput="validatePassword()" onblur="hideMessageIfEmpty()" />
+            <small id="passwordMessage" class="text-muted" style="display: none;">Mật khẩu phải tối thiểu 6 ký tự.</small>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="FirstName">First Name</label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="LastName">Last name</label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="MiddleName">Middle name</label>
+            <input asp-for="MiddleName" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Dob">Date of Birth</label>
+            <input asp-for="Dob" type="date" class="form-control" />
+            <span asp-validation-for="Dob" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="PhoneNumber">Phone number</label>
+            <input asp-for="PhoneNumber" class="form-control" />
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+    </form>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'SIGN UP',
+                text: '@TempData["SuccessMessage"]',
+                timer: 5000,
+                showConfirmButton: false,
+                toast: true,
+                position: 'top-end'
+            });
+        </script>
+    }
+    <script src="~/js/register.js"></script>
+</body>
+</html>

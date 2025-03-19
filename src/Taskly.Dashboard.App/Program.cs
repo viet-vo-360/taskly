@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Taskly.Models;
+using Taskly.Dashboard.App.Data;
+
 namespace Taskly.Dashboard.App
 {
     public class Program
@@ -32,7 +33,7 @@ namespace Taskly.Dashboard.App
             // Set default route
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Users}/{action=Index}/{id?}");
+                pattern: "{controller=Home}/{action=Register}/{id?}");
 
             app.Run();
         }

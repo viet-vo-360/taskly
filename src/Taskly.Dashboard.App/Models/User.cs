@@ -2,15 +2,16 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Users.Models;
+namespace Taskly.Users.Models;
 
-[Table("Users")] // Chỉ định bảng Users trong database
+[Table("Users")] 
 public partial class User
 {
     [Key]
     public long Id { get; set; }
 
-    [Required, EmailAddress]
+    [Required]
+    [EmailAddress]
     [StringLength(50)]
     public string Email { get; set; } = null!;
 
@@ -26,7 +27,7 @@ public partial class User
     public string? MiddleName { get; set; }
 
     [Required]
-    [StringLength(50)]
+    [StringLength(60)]
     public string Password { get; set; } = null!;
 
     [Column("DOB")]
@@ -42,5 +43,5 @@ public partial class User
 
     public bool IsActive { get; set; } = true;
 
-    public bool EmailVerified { get; set; }
+    public bool EmailVerified { get; set; } = false;
 }
