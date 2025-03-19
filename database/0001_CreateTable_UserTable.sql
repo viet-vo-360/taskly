@@ -8,7 +8,7 @@ CREATE TABLE Users(
     FirstName NVARCHAR(50) NOT NULL,
     LastName NVARCHAR(50) NOT NULL,
     MiddleName NVARCHAR(50) NULL,
-    Password NVARCHAR(50) NOT NULL,
+    Password NVARCHAR(60) NOT NULL,
     DOB DATE NOT NULL,
     PhoneNumber NVARCHAR(20) NULL UNIQUE,
     CreatedAt DATETIME2(0) DEFAULT SYSDATETIME() NOT NULL,
@@ -17,5 +17,7 @@ CREATE TABLE Users(
     EmailVerified BIT DEFAULT 0 NOT NULL
 );
 GO
+
+
 
 
