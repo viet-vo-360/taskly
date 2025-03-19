@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Users.Models;
+using Taskly.Users.Models;
 
-namespace Taskly.Models;
+namespace Taskly.Dashboard.App.Data;
 
 public partial class AppDbContext : DbContext
 {
