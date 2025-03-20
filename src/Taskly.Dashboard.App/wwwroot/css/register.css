@@ -69,4 +69,9 @@ button:hover {
     background: #0056b3;
 }
 
+.checkbox {
+    margin-bottom: 10px;
+    transform: scale(1.5);
+}
+
 

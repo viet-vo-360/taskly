@@ -26,3 +26,9 @@ function hideMessageIfEmpty() {
         message.style.display = "none";
     }
 }
+
+
+
+
+
+

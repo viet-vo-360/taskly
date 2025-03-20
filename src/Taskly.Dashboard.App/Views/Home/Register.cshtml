@@ -58,7 +58,17 @@
             <span asp-validation-for="PhoneNumber" class="text-danger"></span>
         </div>
 
-        <button type="submit" class="btn btn-primary">Sign Up</button>
+
+        <input type="checkbox" class="checkbox" id="agreeCheckbox" onclick="check()" />
+        <label for="agreeCheckbox">I agree to the Terms & Conditions</label>
+
+        <p id="error-message" style="color: red; font-size: 14px">
+            Please agree to the Terms and Conditions before registering.
+        </p>
+
+        <button type="submit" class="btn btn-primary" id="registerBtn" disabled>Register</button>
+
+
     </form>
 
     <!-- SweetAlert2 -->
@@ -78,6 +88,23 @@
             });
         </script>
     }
+
+    <script>
+        function check() {
+            let errorMessage = document.getElementById("error-message");
+            let check = document.getElementById("agreeCheckbox");
+            let register = document.getElementById("registerBtn");
+
+            if (check.checked == true) {
+                errorMessage.style.display = "none";
+                register.disabled = false;
+            } else {
+
+                errorMessage.style.display = "block"
+                register.disabled = true;
+            }
+        }
+    </script>
     <script src="~/js/register.js"></script>
 </body>
 </html>
