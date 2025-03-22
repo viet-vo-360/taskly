@@ -1,4 +1,9 @@
-CREATE DATABASE Taskly
+IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'Taskly')
+BEGIN
+    CREATE DATABASE Taskly;
+END
+GO
+
 USE Taskly
 GO
 
