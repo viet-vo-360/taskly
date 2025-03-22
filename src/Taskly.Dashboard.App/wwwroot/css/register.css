@@ -74,4 +74,15 @@ button:hover {
     transform: scale(1.5);
 }
 
+.form-group .confirmSuccess {
+    color: green;
+    font-size: 14px;
+    display: block;
+}
+
+.form-group .confirmError {
+    color: red;
+    font-size: 14px;
+    display: block;
+}
 

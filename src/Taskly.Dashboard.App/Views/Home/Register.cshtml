@@ -26,7 +26,16 @@
             <label asp-for="Password">Password</label>
             <input asp-for="Password" type="password" class="form-control" id="passwordInput"
                    onfocus="showMessage()" oninput="validatePassword()" onblur="hideMessageIfEmpty()" />
-            <small id="passwordMessage" class="text-muted" style="display: none;">Mật khẩu phải tối thiểu 6 ký tự.</small>
+            <small id="passwordMessage" class="text-muted" style="display: none;"></small>
+        </div>
+
+        <div class="form-group">
+            <label>Confirm password</label>
+            <input type="password" class="form-control" id="confirmPassword" 
+                   onfocus="showConfirmMessage()"
+                   oninput="validateConfirmPassword()"
+                   onblur="hideConfirmMessageIfEmpty()" />
+            <small id="confirmPasswordMessage" class=""></small>
         </div>
 
         <div class="form-group">
@@ -89,22 +98,6 @@
         </script>
     }
 
-    <script>
-        function check() {
-            let errorMessage = document.getElementById("error-message");
-            let check = document.getElementById("agreeCheckbox");
-            let register = document.getElementById("registerBtn");
-
-            if (check.checked == true) {
-                errorMessage.style.display = "none";
-                register.disabled = false;
-            } else {
-
-                errorMessage.style.display = "block"
-                register.disabled = true;
-            }
-        }
-    </script>
     <script src="~/js/register.js"></script>
 </body>
 </html>

@@ -42,8 +42,14 @@ namespace Home.Controllers
                 return View(model);
             }
 
-            // Hashed & salted - BCrypt
-            model.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
+            if (_context.Users.Any(u => u.PhoneNumber == model.PhoneNumber))
+            {
+                ModelState.AddModelError("PhoneNumber", "Phone number already exists.");
+                return View(model);
+            }
+
+                // Hashed & salted - BCrypt
+                model.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
 
             model.CreatedAt = DateTime.UtcNow;
             model.UpdatedAt = DateTime.UtcNow;
