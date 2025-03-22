@@ -25,9 +25,3 @@ BEGIN
     );
 END
 GO
-
-
-
-
-
-
