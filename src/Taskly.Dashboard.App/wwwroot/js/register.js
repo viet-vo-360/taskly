@@ -81,8 +81,3 @@ function validateConfirmPassword() {
         changeClass(confirmMessage, "confirmError", "confirmSuccess")
     }
 }
-
-
-
-
-
