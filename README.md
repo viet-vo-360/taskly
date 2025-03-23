@@ -44,3 +44,7 @@ This project is intended for learning purposes. Feel free to contribute by impro
 
 ## License
 MIT License
+
+
+## Config User Secrets
+dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Server=YOUR_NEW_SERVER;Database=Taskly;Trusted_Connection=True;TrustServerCertificate=True;"

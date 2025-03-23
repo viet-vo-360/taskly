@@ -9,16 +9,18 @@ namespace Taskly.Dashboard.App
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Configure database connection
+            if (builder.Environment.IsDevelopment())
+            {
+                builder.Configuration.AddUserSecrets<Program>();
+            }
+
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            // Register MVC 
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
@@ -30,7 +32,6 @@ namespace Taskly.Dashboard.App
             app.UseRouting();
             app.UseAuthorization();
 
-            // Set default route
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Register}/{id?}");
