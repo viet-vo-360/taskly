@@ -1,68 +1,13 @@
-﻿form {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    background: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-   text-align: center;
-   display: block;
-   font-weight: bold;
-   margin-bottom: 15px;
-   color: #333;
-}
-
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-
-.form-group label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #333;
-}
-
-
-.form-control {
-    width: 95%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: border 0.3s;
-}
-
-
-.form-control:focus {
-    border-color: #007bff;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-
-.text-danger {
-    color: #e74c3c;
-    font-size: 14px;
-    margin-top: 5px;
-}
-
-
-button {
-    width: 100%;
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s;
+﻿button {
+background: #007bff;
+border: none;
+border-radius: 5px;
+color: white;
+cursor: pointer;
+font-size: 16px;
+padding: 10px;
+transition: background 0.3s;
+width: 100%;
 }
 
 button:hover {
@@ -70,18 +15,67 @@ button:hover {
 }
 
 .checkbox {
-    margin-bottom: 10px;
-    transform: scale(1.5);
+margin-bottom: 10px;
+transform: scale(1.5);
 }
 
-.form-group .confirmSuccess {
-    color: green;
-    font-size: 14px;
-    display: block;
+form {
+background: #f9f9f9;
+border-radius: 8px;
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+margin: 0 auto;
+max-width: 400px;
+padding: 20px;
+}
+
+h1 {
+color: #333;
+display: block;
+font-weight: bold;
+margin-bottom: 15px;
+text-align: center;
+}
+
+.form-control {
+border: 1px solid #ccc;
+border-radius: 5px;
+font-size: 16px;
+padding: 10px;
+transition: border 0.3s;
+width: 95%;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+.form-group {
+margin-bottom: 15px;
 }
 
 .form-group .confirmError {
     color: red;
-    font-size: 14px;
     display: block;
+    font-size: 14px;
+}
+
+.form-group .confirmSuccess {
+    color: green;
+    display: block;
+    font-size: 14px;
+}
+
+.form-group label {
+    color: #333;
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.text-danger {
+color: #e74c3c;
+font-size: 14px;
+margin-top: 5px;
 }
