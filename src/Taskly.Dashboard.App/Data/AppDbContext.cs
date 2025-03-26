@@ -1,51 +1,28 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using Taskly.Users.Models;
+using Taskly.Dashboard.App.Data.Configurations;
 
-namespace Taskly.Dashboard.App.Data;
-
-public partial class AppDbContext : DbContext
+namespace Taskly.Dashboard.App.Data
 {
-    public AppDbContext()
+    public partial class AppDbContext : DbContext
     {
-    }
-
-    public AppDbContext(DbContextOptions<AppDbContext> options)
-        : base(options)
-    {
-    }
-
-    public virtual DbSet<User> Users { get; set; }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<User>(entity =>
+        public AppDbContext()
         {
-            entity.HasKey(e => e.Id).HasName("PK__Users__3214EC0789D39F84");
+        }
 
-            entity.HasIndex(e => e.PhoneNumber, "UQ__Users__85FB4E388A8EA8DA").IsUnique();
+        public AppDbContext(DbContextOptions<AppDbContext> options)
+            : base(options)
+        {
+        }
 
-            entity.HasIndex(e => e.Email, "UQ__Users__A9D105342807F42D").IsUnique();
+        public virtual DbSet<User> Users { get; set; }
 
-            entity.Property(e => e.CreatedAt)
-                .HasPrecision(0)
-                .HasDefaultValueSql("(sysdatetime())");
-            entity.Property(e => e.Dob).HasColumnName("DOB");
-            entity.Property(e => e.Email).HasMaxLength(255);
-            entity.Property(e => e.FirstName).HasMaxLength(255);
-            entity.Property(e => e.IsActive).HasDefaultValue(true);
-            entity.Property(e => e.LastName).HasMaxLength(255);
-            entity.Property(e => e.MiddleName).HasMaxLength(255);
-            entity.Property(e => e.Password).HasMaxLength(255);
-            entity.Property(e => e.PhoneNumber).HasMaxLength(20);
-            entity.Property(e => e.UpdatedAt)
-                .HasPrecision(0)
-                .HasDefaultValueSql("(sysdatetime())");
-        });
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new UserConfiguration()); // Apply User entity configuration
+            OnModelCreatingPartial(modelBuilder);
+        }
 
-        OnModelCreatingPartial(modelBuilder);
+        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
-
-    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
