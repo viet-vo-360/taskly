@@ -1,5 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Taskly.Dashboard.App.Data;
+using Taskly.Dashboard.App.Repositories;
+using Taskly.Dashboard.App.Repositories.Interfaces;
+using Taskly.Dashboard.App.Services;
+using Taskly.Dashboard.App.Services.Interfaces;
 
 namespace Taskly.Dashboard.App
 {
@@ -14,9 +18,15 @@ namespace Taskly.Dashboard.App
                 builder.Configuration.AddUserSecrets<Program>();
             }
 
+            // Register DbContext
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+            // Register Repository & Service
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IUserService, UserService>();
+
+            // Register MVC Controllers
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();

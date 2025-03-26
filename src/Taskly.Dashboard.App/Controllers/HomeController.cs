@@ -8,17 +8,18 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Taskly.Dashboard.App.Data;
+using Taskly.Dashboard.App.Services.Interfaces;
 using Taskly.Users.Models;
 
 namespace Home.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IUserService _userService;
 
-        public HomeController(AppDbContext context)
+        public HomeController(IUserService userService)
         {
-            _context = context;
+            _userService = userService;
         }
 
         [HttpGet]
@@ -36,31 +37,13 @@ namespace Home.Controllers
                 return View(model);
             }
 
-            if (_context.Users.Any(u => u.Email == model.Email))
+            if (!_userService.RegisterUser(model))
             {
-                ModelState.AddModelError("Email", "Email already exists.");
+                ModelState.AddModelError("Email", "Email or Phone number already exists.");
                 return View(model);
             }
-
-            if (_context.Users.Any(u => u.PhoneNumber == model.PhoneNumber))
-            {
-                ModelState.AddModelError("PhoneNumber", "Phone number already exists.");
-                return View(model);
-            }
-
-                // Hashed & salted - BCrypt
-                model.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
-
-            model.CreatedAt = DateTime.UtcNow;
-            model.UpdatedAt = DateTime.UtcNow;
-            model.IsActive = true;
-            model.EmailVerified = false;
-
-            _context.Users.Add(model);
-            _context.SaveChanges();
 
             TempData["SuccessMessage"] = "Successful!";
-
             return RedirectToAction("");
         }
     }
