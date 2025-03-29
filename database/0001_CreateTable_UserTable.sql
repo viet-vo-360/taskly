@@ -26,3 +26,23 @@ BEGIN
 END
 GO
 
+IF NOT EXISTS (
+    SELECT * FROM sys.indexes 
+    WHERE name = 'IX_Users_Email' AND object_id = OBJECT_ID('Users')
+)
+BEGIN
+    CREATE NONCLUSTERED INDEX IX_Users_Email 
+    ON Users(Email);
+END
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM sys.indexes 
+    WHERE name = 'IX_Users_PhoneNumber' AND object_id = OBJECT_ID('Users')
+)
+BEGIN
+    CREATE NONCLUSTERED INDEX IX_Users_PhoneNumber 
+    ON Users(PhoneNumber);
+END
+GO
+
