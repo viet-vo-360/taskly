@@ -27,7 +27,7 @@ namespace Home.Controllers
         public IActionResult Register()
         {
             return View();
-        }
+        }   
 
         [HttpPost]
         [ValidateAntiForgeryToken]
