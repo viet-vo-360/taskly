@@ -4,6 +4,6 @@ namespace Taskly.Dashboard.App.Services.Interfaces
 {
     public interface IUserService
     {
-        bool RegisterUser(User model);
+        Task<long?> RegisterUser(User model);
     }
 }

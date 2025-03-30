@@ -8,6 +8,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Taskly.Dashboard.App.Data;
+using Taskly.Dashboard.App.Exceptions;
 using Taskly.Dashboard.App.Services.Interfaces;
 using Taskly.Users.Models;
 
@@ -30,21 +31,31 @@ namespace Home.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Register(User model)
+        public async Task<IActionResult> Register(User model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            if (!_userService.RegisterUser(model))
+            try
             {
-                ModelState.AddModelError("Email", "Email or Phone number already exists.");
+                var userId = await _userService.RegisterUser(model);
+
+                if (userId == null)
+                {
+                    ModelState.AddModelError("Email", "Registration failed. Please try again.");
+                    return View(model);
+                }
+
+                TempData["SuccessMessage"] = "Registration successful!";
+                return RedirectToAction("");
+            }
+            catch (UserRegistrationException ex)
+            {
+                ModelState.AddModelError("Email", ex.Message);
                 return View(model);
             }
-
-            TempData["SuccessMessage"] = "Successful!";
-            return RedirectToAction("");
         }
     }
 }

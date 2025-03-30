@@ -4,8 +4,8 @@ namespace Taskly.Dashboard.App.Repositories.Interfaces
 {
     public interface IUserRepository
     {
-        bool IsEmailExists(string email);
-        bool IsPhoneNumberExists(string phoneNumber);
-        void RegisterUser(User user);
+        Task<bool> IsEmailExistsAsync(string email);
+        Task<bool> IsPhoneNumberExistsAsync(string phoneNumber);
+        Task<User> RegisterUserAsync(User user);
     }
 }

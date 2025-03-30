@@ -1,4 +1,5 @@
-﻿using Taskly.Dashboard.App.Repositories.Interfaces;
+﻿using Taskly.Dashboard.App.Exceptions;
+using Taskly.Dashboard.App.Repositories.Interfaces;
 using Taskly.Dashboard.App.Services.Interfaces;
 using Taskly.Users.Models;
 
@@ -13,11 +14,38 @@ namespace Taskly.Dashboard.App.Services
             _userRepository = userRepository;
         }
 
-        public bool RegisterUser(User model)
+        //public bool RegisterUser(User model)
+        //{
+        //    if (_userRepository.IsEmailExists(model.Email) || _userRepository.IsPhoneNumberExists(model.PhoneNumber))
+        //    {
+        //        return false;
+        //    }
+
+        //    model.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
+        //    model.CreatedAt = DateTime.UtcNow;
+        //    model.UpdatedAt = DateTime.UtcNow;
+        //    model.IsActive = true;
+        //    model.EmailVerified = false;
+
+        //    _userRepository.RegisterUser(model);
+        //    return true;
+        //}
+
+        public async Task<long?> RegisterUser(User model)
         {
-            if (_userRepository.IsEmailExists(model.Email) || _userRepository.IsPhoneNumberExists(model.PhoneNumber))
+            if (model == null)
             {
-                return false;
+                throw new ArgumentNullException(nameof(model), "User model cannot be null.");
+            }
+
+            if (await _userRepository.IsEmailExistsAsync(model.Email))
+            {
+                throw new UserRegistrationException("Email already exists.");
+            }
+
+            if (await _userRepository.IsPhoneNumberExistsAsync(model.PhoneNumber))
+            {
+                throw new UserRegistrationException("Phone already exists.");
             }
 
             model.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
@@ -26,8 +54,9 @@ namespace Taskly.Dashboard.App.Services
             model.IsActive = true;
             model.EmailVerified = false;
 
-            _userRepository.RegisterUser(model);
-            return true;
+            var createdUser = await _userRepository.RegisterUserAsync(model);
+
+            return createdUser.Id;
         }
     }
 }
