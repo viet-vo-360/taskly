@@ -77,7 +77,7 @@ function validateConfirmPassword() {
         ConfirmMessage(confirmMessage, "Passwords match!")
         changeClass(confirmMessage, "confirmSuccess", "confirmError")
     } else {
-        ConfirmMessage(confirmMessage, "passwords do not match!")
+        ConfirmMessage(confirmMessage, "Passwords do not match!")
         changeClass(confirmMessage, "confirmError", "confirmSuccess")
     }
 }

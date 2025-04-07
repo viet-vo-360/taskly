@@ -31,6 +31,7 @@ public partial class User
     [StringLength(60)]
     public string Password { get; set; } = null!;
 
+    [Required]
     [Column("DOB")]
     public DateOnly Dob { get; set; }
 
