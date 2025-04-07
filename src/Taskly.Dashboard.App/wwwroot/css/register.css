@@ -1,13 +1,13 @@
 ﻿button {
-background: #007bff;
-border: none;
-border-radius: 5px;
-color: white;
-cursor: pointer;
-font-size: 16px;
-padding: 10px;
-transition: background 0.3s;
-width: 100%;
+    background: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px;
+    transition: background 0.3s;
+    width: 100%;
 }
 
 button:hover {
@@ -15,34 +15,34 @@ button:hover {
 }
 
 .checkbox {
-margin-bottom: 10px;
-transform: scale(1.5);
+    margin-bottom: 10px;
+    transform: scale(1.5);
 }
 
 form {
-background: #f9f9f9;
-border-radius: 8px;
-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-margin: 0 auto;
-max-width: 400px;
-padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    max-width: 400px;
+    padding: 20px;
 }
 
 h1 {
-color: #333;
-display: block;
-font-weight: bold;
-margin-bottom: 15px;
-text-align: center;
+    color: #333;
+    display: block;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center;
 }
 
 .form-control {
-border: 1px solid #ccc;
-border-radius: 5px;
-font-size: 16px;
-padding: 10px;
-transition: border 0.3s;
-width: 95%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 10px;
+    transition: border 0.3s;
+    width: 95%;
 }
 
 .form-control:focus {
@@ -52,7 +52,7 @@ width: 95%;
 }
 
 .form-group {
-margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 .form-group .confirmError {
@@ -75,7 +75,7 @@ margin-bottom: 15px;
 }
 
 .text-danger {
-color: #e74c3c;
-font-size: 14px;
-margin-top: 5px;
+    color: #e74c3c;
+    font-size: 14px;
+    margin-top: 5px;
 }
