@@ -19,7 +19,7 @@ namespace Taskly.Dashboard.App.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new UserConfiguration()); // Apply User entity configuration
+            modelBuilder.ApplyConfiguration(new UserConfiguration()); 
             OnModelCreatingPartial(modelBuilder);
         }
 
