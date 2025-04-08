@@ -45,4 +45,3 @@ BEGIN
     ON Users(PhoneNumber);
 END
 GO
-

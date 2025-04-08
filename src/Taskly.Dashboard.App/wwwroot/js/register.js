@@ -55,7 +55,7 @@ function showConfirmMessage() {
     let confirmPassword = document.getElementById("confirmPassword").value;
     if (passwordInput.length !== 0 && passwordInput !== confirmPassword) {
         changeClass(confirmMessage, "confirmError", "confirmSuccess")
-        ConfirmMessage(confirmMessage, "passwords do not match!")
+        ConfirmMessage(confirmMessage, "Passwords do not match!")
     }
 }
 
