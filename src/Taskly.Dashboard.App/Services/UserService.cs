@@ -14,7 +14,7 @@ namespace Taskly.Dashboard.App.Services
             _userRepository = userRepository;
         }
 
-        public async Task<long?> RegisterUser(User model)
+        public async Task<long?> RegisterUserAsync(User model)
         {
             if (model == null)
             {
@@ -37,9 +37,9 @@ namespace Taskly.Dashboard.App.Services
             model.IsActive = true;
             model.EmailVerified = false;
 
-            var createdUser = await _userRepository.RegisterUserAsync(model);
+            var createdUserId = await _userRepository.RegisterUserAsync(model);
 
-            return createdUser.Id;
+            return createdUserId;
         }
     }
 }

@@ -7,6 +7,7 @@
 
 @section Styles {
     <link rel="stylesheet" href="~/css/register.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/sweetalert2/sweetalert2.min.css" asp-append-version="true" />
 }
 
 <h1>SIGN UP</h1>
@@ -21,17 +22,19 @@
     <div class="form-group">
         <label asp-for="Password">Password</label>
         <input asp-for="Password" type="password" class="form-control" id="passwordInput"
-               onfocus="showMessage()" oninput="validatePassword()" onblur="hideMessageIfEmpty()" />
+               onfocus="showPasswordMessage()"
+               oninput="validatePassword()"
+               onblur="hidePasswordMessageIfEmpty()" />
         <small id="passwordMessage" class="text-muted" style="display: none;"></small>
     </div>
 
     <div class="form-group">
         <label>Confirm password</label>
         <input type="password" class="form-control" id="confirmPassword"
-               onfocus="showConfirmMessage()"
+               onfocus="showConfirmPasswordMessage()"
                oninput="validateConfirmPassword()"
-               onblur="hideConfirmMessageIfEmpty()" />
-        <small id="confirmPasswordMessage" class=""></small>
+               onblur="validateConfirmPassword()" />
+        <small id="confirmPasswordMessage"></small>
     </div>
 
     <div class="form-group">
@@ -63,7 +66,7 @@
         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
     </div>
 
-    <input type="checkbox" class="checkbox" id="agreeCheckbox" onclick="check()" />
+    <input type="checkbox" class="checkbox" id="agreeCheckbox" onclick="toggleRegisterButton()" />
     <label for="agreeCheckbox">I agree to the Terms & Conditions</label>
 
     <p id="error-message" style="color: red">Please agree to the Terms and Conditions.</p>
@@ -73,7 +76,7 @@
 </form>
 
 <!-- SweetAlert2 -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="~/lib/sweetalert2/sweetalert2.min.js" asp-append-version="true"></script>
 
 @if (TempData["SuccessMessage"] != null)
 {
@@ -81,7 +84,7 @@
         Swal.fire({
             icon: 'success',
             title: 'SIGN UP',
-            text: '@TempData["SuccessMessage"]',
+            text: @Html.Raw(Json.Serialize(TempData["SuccessMessage"])),
             timer: 5000,
             showConfirmButton: false,
             toast: true,
@@ -90,4 +93,4 @@
     </script>
 }
 
-<script src="~/js/register.js"></script>
+<script src="~/js/register.js" asp-append-version="true"></script>

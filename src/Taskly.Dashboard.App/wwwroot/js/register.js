@@ -1,83 +1,85 @@
-﻿function showMessage() {
-    let password = document.getElementById("passwordInput").value;
-    let message = document.getElementById("passwordMessage");
-    if (password.length < 6) {
-        message.style.display = "block";
-        message.style.color = "red";
-        Message(message, "Password must be at least 6 characters long!")
-    }
-}
+﻿// Password Validation
+function showPasswordMessage() {
+    const password = getValue("passwordInput");
+    const message = getElement("passwordMessage");
 
-function Message(element, message) {
-    element.textContent = message;
+    if (password.length < 6) {
+        updateMessage(message, "Password must be at least 6 characters long!", "red", true);
+    }
 }
 
 function validatePassword() {
-    let password = document.getElementById("passwordInput").value;
-    let message = document.getElementById("passwordMessage");
+    const password = getValue("passwordInput");
+    const message = getElement("passwordMessage");
 
     if (password.length >= 6) {
-        message.style.color = "green";
-        Message(message, "Valid password.")
+        updateMessage(message, "Valid password.", "green", true);
     } else {
-        message.style.color = "red";
-        Message(message, "Password must be at least 6 characters long!")
+        updateMessage(message, "Password must be at least 6 characters long!", "red", true);
     }
 }
 
-function hideMessageIfEmpty() {
-    let password = document.getElementById("passwordInput").value;
-    let message = document.getElementById("passwordMessage");
+function hidePasswordMessageIfEmpty() {
+    const password = getValue("passwordInput");
+    const message = getElement("passwordMessage");
 
     if (password.length === 0) {
         message.style.display = "none";
     }
 }
 
-function check() {
-    let errorMessage = document.getElementById("error-message");
-    let check = document.getElementById("agreeCheckbox");
-    let register = document.getElementById("registerBtn");
+// Confirm Password Validation
+function showConfirmPasswordMessage() {
+    const password = getValue("passwordInput");
+    const confirmPassword = getValue("confirmPassword");
+    const message = getElement("confirmPasswordMessage");
 
-    if (check.checked == true) {
-        errorMessage.style.display = "none";
-        register.disabled = false;
-    } else {
-        errorMessage.style.display = "block"
-        register.disabled = true;
+    if (password && password !== confirmPassword) {
+        updateConfirmMessage(message, "Passwords do not match!", "confirmError", "confirmSuccess");
     }
-}
-
-
-function showConfirmMessage() {
-    let confirmMessage = document.getElementById("confirmPasswordMessage");
-    let passwordInput = document.getElementById("passwordInput").value;
-    let confirmPassword = document.getElementById("confirmPassword").value;
-    if (passwordInput.length !== 0 && passwordInput !== confirmPassword) {
-        changeClass(confirmMessage, "confirmError", "confirmSuccess")
-        ConfirmMessage(confirmMessage, "Passwords do not match!")
-    }
-}
-
-function changeClass(element, addClass, removeClass) {
-    element.classList.add(addClass);
-    element.classList.remove(removeClass);
-}
-
-function ConfirmMessage(element, message) {
-    element.textContent = message;
 }
 
 function validateConfirmPassword() {
-    let passwordInput = document.getElementById("passwordInput").value;
-    let confirmPassword = document.getElementById("confirmPassword").value;
-    let confirmMessage = document.getElementById("confirmPasswordMessage");
+    const password = getValue("passwordInput");
+    const confirmPassword = getValue("confirmPassword");
+    const message = getElement("confirmPasswordMessage");
 
-    if (passwordInput === confirmPassword) {
-        ConfirmMessage(confirmMessage, "Passwords match!")
-        changeClass(confirmMessage, "confirmSuccess", "confirmError")
+    if (password === confirmPassword) {
+        updateConfirmMessage(message, "Passwords match!", "confirmSuccess", "confirmError");
     } else {
-        ConfirmMessage(confirmMessage, "Passwords do not match!")
-        changeClass(confirmMessage, "confirmError", "confirmSuccess")
+        updateConfirmMessage(message, "Passwords do not match!", "confirmError", "confirmSuccess");
     }
+}
+
+// Checkbox Agreement
+function toggleRegisterButton() {
+    const checkbox = getElement("agreeCheckbox");
+    const registerBtn = getElement("registerBtn");
+    const errorMessage = getElement("error-message");
+
+    const isChecked = checkbox.checked;
+
+    errorMessage.style.display = isChecked ? "none" : "block";
+    registerBtn.disabled = !isChecked;
+}
+
+// Helper Functions
+function getElement(id) {
+    return document.getElementById(id);
+}
+
+function getValue(id) {
+    return getElement(id).value.trim();
+}
+
+function updateMessage(element, text, color, show = true) {
+    element.textContent = text;
+    element.style.color = color;
+    element.style.display = show ? "block" : "none";
+}
+
+function updateConfirmMessage(element, text, addClass, removeClass) {
+    element.textContent = text;
+    element.classList.add(addClass);
+    element.classList.remove(removeClass);
 }

@@ -20,7 +20,12 @@ namespace Taskly.Dashboard.App
                 builder.Configuration.AddUserSecrets<Program>();
             }
 
-            builder.Services.Configure<DatabaseOptions>(builder.Configuration.GetSection("DatabaseOptions"));
+            // Configure DatabaseOptions and add validation
+            builder.Services.AddOptions<DatabaseOptions>()
+                .Bind(builder.Configuration.GetSection(DatabaseOptions.ConfigurationSectionName))
+                .Validate(options =>
+                    options is not null && !string.IsNullOrWhiteSpace(options.ConnectionString),
+                    $"{nameof(DatabaseOptions.ConnectionString)} is invalid!");
 
             builder.Services.AddDbContext<AppDbContext>((serviceProvider, options) =>
             {

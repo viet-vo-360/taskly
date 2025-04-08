@@ -3,5 +3,7 @@
     public class DatabaseOptions
     {
         public string ConnectionString { get; set; }
+
+        public const string ConfigurationSectionName = "DatabaseOptions";
     }
 }

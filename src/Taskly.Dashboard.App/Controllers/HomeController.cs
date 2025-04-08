@@ -40,7 +40,7 @@ namespace Home.Controllers
 
             try
             {
-                var userId = await _userService.RegisterUser(model);
+                var userId = await _userService.RegisterUserAsync(model);
 
                 if (userId == null)
                 {
@@ -54,6 +54,11 @@ namespace Home.Controllers
             catch (UserRegistrationException ex)
             {
                 ModelState.AddModelError("Email", ex.Message);
+                return View(model);
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError(string.Empty, "An unexpected error occurred. Please try again later.");
                 return View(model);
             }
         }

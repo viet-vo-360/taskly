@@ -15,40 +15,47 @@ namespace Taskly.Dashboard.App.Data.Configurations
             builder.HasIndex(e => e.PhoneNumber)
                    .IsUnique();
 
+            builder.Property(e => e.PhoneNumber)
+                   .IsRequired()
+                   .HasMaxLength(20);
+
             builder.HasIndex(e => e.Email)
                    .IsUnique();
 
-            builder.Property(e => e.CreatedAt)
-                   .HasPrecision(0)
-                   .HasDefaultValueSql("(sysdatetime())");
-
-            builder.Property(e => e.Dob)
-                   .HasColumnName("DOB");
-
             builder.Property(e => e.Email)
+                   .IsRequired()
                    .HasMaxLength(255);
 
+            builder.Property(e => e.CreatedAt)
+                   .HasPrecision(0)
+                   .HasDefaultValueSql("(GETUTCDATE())");
+
+            builder.Property(e => e.Dob)
+                   .IsRequired()
+                   .HasColumnName("DOB");
+
             builder.Property(e => e.FirstName)
+                   .IsRequired()
                    .HasMaxLength(255);
 
             builder.Property(e => e.IsActive)
                    .HasDefaultValue(true);
 
             builder.Property(e => e.LastName)
+                   .IsRequired()
                    .HasMaxLength(255);
 
             builder.Property(e => e.MiddleName)
+                   .IsRequired()
                    .HasMaxLength(255);
 
             builder.Property(e => e.Password)
+                   .IsRequired()
                    .HasMaxLength(255);
-
-            builder.Property(e => e.PhoneNumber)
-                   .HasMaxLength(20);
 
             builder.Property(e => e.UpdatedAt)
                    .HasPrecision(0)
-                   .HasDefaultValueSql("(sysdatetime())");
+                   .HasDefaultValueSql("(GETUTCDATE())");
         }
     }
 }
