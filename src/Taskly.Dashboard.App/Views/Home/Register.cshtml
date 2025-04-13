@@ -11,6 +11,7 @@
 }
 
 <h1>SIGN UP</h1>
+
 <form asp-action="Register" method="post">
 
     <div class="form-group">
@@ -89,6 +90,20 @@
             showConfirmButton: false,
             toast: true,
             position: 'top-end'
+        });
+    </script>
+}
+
+@if (ViewData.ModelState.ContainsKey("Error") && ViewData.ModelState["Error"].Errors.Count > 0)
+{
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: '@ViewData.ModelState["Error"].Errors[0].ErrorMessage',
+            confirmButtonText: 'OK',
+            timer: 5000,
+            timerProgressBar: true
         });
     </script>
 }

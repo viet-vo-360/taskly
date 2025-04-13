@@ -58,7 +58,7 @@ namespace Home.Controllers
             }
             catch (Exception)
             {
-                ModelState.AddModelError(string.Empty, "An unexpected error occurred. Please try again later.");
+                ModelState.AddModelError("Error", "An unexpected error occurred. Please try again later.");
                 return View(model);
             }
         }
