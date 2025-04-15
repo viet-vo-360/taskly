@@ -14,7 +14,7 @@ namespace Taskly.Dashboard.App.Repositories
             _context = context;
         }
 
-        public async Task<bool> IsEmailExistsAsync(string email) => await _context.Users.AnyAsync(u => u.Email.ToLower() == email.ToLower());
+        public async Task<bool> IsEmailExistsAsync(string email) => await _context.Users.AnyAsync(u => string.Equals(u.Email, email, StringComparison.OrdinalIgnoreCase));
 
         public async Task<bool> IsPhoneNumberExistsAsync(string phoneNumber) => await _context.Users.AnyAsync(u => u.PhoneNumber == phoneNumber);
 
