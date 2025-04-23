@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+	<!-- Create the Taskly database if it doesn't exist -->
+	<changeSet id="1" author="yourname">
+		<sql>
+			<![CDATA[
+                IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'Taskly')
+                BEGIN
+                    CREATE DATABASE Taskly;
+                END
+            ]]>
+		</sql>
+	</changeSet>
+
+	<!-- Use the Taskly database -->
+	<changeSet id="2" author="yourname">
+		<sql>USE Taskly</sql>
+	</changeSet>
+
+	<!-- Create the Users table if it doesn't exist -->
+	<changeSet id="3" author="yourname">
+		<sql>
+			<![CDATA[
+                IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Users')
+                BEGIN
+                    CREATE TABLE Users (
+                        Id BIGINT IDENTITY(1,1) PRIMARY KEY,
+                        Email NVARCHAR(255) NOT NULL UNIQUE,
+                        FirstName NVARCHAR(255) NOT NULL,
+                        LastName NVARCHAR(255) NOT NULL,
+                        MiddleName NVARCHAR(255) NULL,
+                        Password VARCHAR(60) NOT NULL,
+                        DOB DATE NOT NULL,
+                        PhoneNumber NVARCHAR(20) NULL UNIQUE,
+                        CreatedAt DATETIME2(3) DEFAULT SYSDATETIME() NOT NULL,
+                        UpdatedAt DATETIME2(3) DEFAULT SYSDATETIME() NOT NULL,
+                        IsActive BIT DEFAULT 1 NOT NULL,
+                        EmailVerified BIT DEFAULT 0 NOT NULL
+                    );
+                END
+            ]]>
+		</sql>
+	</changeSet>
+
+	<!-- Create the index IX_Users_Email if it doesn't exist -->
+	<changeSet id="4" author="yourname">
+		<sql>
+			<![CDATA[
+                IF NOT EXISTS (
+                    SELECT * FROM sys.indexes 
+                    WHERE name = 'IX_Users_Email' AND object_id = OBJECT_ID('Users')
+                )
+                BEGIN
+                    CREATE NONCLUSTERED INDEX IX_Users_Email 
+                    ON Users(Email);
+                END
+            ]]>
+		</sql>
+	</changeSet>
+
+	<!-- Create the index IX_Users_PhoneNumber if it doesn't exist -->
+	<changeSet id="5" author="yourname">
+		<sql>
+			<![CDATA[
+                IF NOT EXISTS (
+                    SELECT * FROM sys.indexes 
+                    WHERE name = 'IX_Users_PhoneNumber' AND object_id = OBJECT_ID('Users')
+                )
+                BEGIN
+                    CREATE NONCLUSTERED INDEX IX_Users_PhoneNumber 
+                    ON Users(PhoneNumber);
+                END
+            ]]>
+		</sql>
+	</changeSet>
+
+</databaseChangeLog>
