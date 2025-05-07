@@ -26,7 +26,7 @@ namespace Taskly.Dashboard.App.Services
                 throw new UserRegistrationException("Email already exists.");
             }
 
-            if (await _userRepository.IsPhoneNumberExistsAsync(model.PhoneNumber))
+            if (await _userRepository.IsPhoneNumberExistsAsync(model.PhoneNumber ?? string.Empty))
             {
                 throw new UserRegistrationException("Phone already exists.");
             }

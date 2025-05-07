@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+	<!-- Use the Taskly database -->
+	<changeSet id="1" author="yourname">
+		<sql>USE Taskly</sql>
+	</changeSet>
+
+	<!-- Alter the Email column in Users table to change collation if the table exists -->
+	<changeSet id="2" author="yourname">
+		<sql>
+			<![CDATA[
+                IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Users')
+                BEGIN
+                    ALTER TABLE Users
+                    ALTER COLUMN Email NVARCHAR(255) COLLATE SQL_Latin1_General_CP1_CI_AS;
+                END
+            ]]>
+		</sql>
+	</changeSet>
+
+</databaseChangeLog>
