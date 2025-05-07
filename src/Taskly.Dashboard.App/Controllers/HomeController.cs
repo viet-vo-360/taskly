@@ -28,7 +28,6 @@ namespace Home.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            _logger.LogInformation("User navigated to Register page at {Time}", DateTime.UtcNow);
             return View();
         }
 
