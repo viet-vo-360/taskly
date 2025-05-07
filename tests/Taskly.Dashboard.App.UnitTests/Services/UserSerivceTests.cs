@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Moq;
+using System;
 using System.Threading.Tasks;
-using Moq;
 using Taskly.Dashboard.App.Exceptions;
 using Taskly.Dashboard.App.Repositories.Interfaces;
 using Taskly.Dashboard.App.Services;
@@ -37,13 +37,16 @@ namespace Taskly.Dashboard.App.UnitTests.Services
         [Fact]
         public async Task RegisterUserAsync_ReturnsUserId_IfValidUser()
         {
+            // Arrange
             var user = GetSampleUser();
             _mockRepo.Setup(r => r.IsEmailExistsAsync(user.Email)).ReturnsAsync(false);
             _mockRepo.Setup(r => r.IsPhoneNumberExistsAsync(user.PhoneNumber ?? string.Empty)).ReturnsAsync(false);
             _mockRepo.Setup(r => r.RegisterUserAsync(It.IsAny<User>())).ReturnsAsync(1);
 
+            // Act
             var result = await _userService.RegisterUserAsync(user);
 
+            // Assert
             Assert.NotNull(result);
             Assert.Equal(1, result);
         }
@@ -51,9 +54,11 @@ namespace Taskly.Dashboard.App.UnitTests.Services
         [Fact]
         public async Task RegisterUserAsync_ThrowsException_IfEmailExists()
         {
+            // Arrange
             var user = GetSampleUser();
             _mockRepo.Setup(r => r.IsEmailExistsAsync(user.Email)).ReturnsAsync(true);
 
+            // Act & Assert
             var ex = await Assert.ThrowsAsync<UserRegistrationException>(() => _userService.RegisterUserAsync(user));
             Assert.Equal("Email already exists.", ex.Message);
         }
@@ -61,10 +66,12 @@ namespace Taskly.Dashboard.App.UnitTests.Services
         [Fact]
         public async Task RegisterUserAsync_ThrowsException_IfPhoneNumberExists()
         {
+            // Arrange
             var user = GetSampleUser();
             _mockRepo.Setup(r => r.IsEmailExistsAsync(user.Email)).ReturnsAsync(false);
             _mockRepo.Setup(r => r.IsPhoneNumberExistsAsync(user.PhoneNumber ?? string.Empty)).ReturnsAsync(true);
 
+            // Act & Assert
             var ex = await Assert.ThrowsAsync<UserRegistrationException>(() => _userService.RegisterUserAsync(user));
             Assert.Equal("Phone already exists.", ex.Message);
         }
@@ -72,8 +79,10 @@ namespace Taskly.Dashboard.App.UnitTests.Services
         [Fact]
         public async Task RegisterUserAsync_ThrowsArgumentNullException_IfUserIsNull()
         {
+            // Arrange
             User? user = null;
 
+            // Act & Assert
             var ex = await Assert.ThrowsAsync<ArgumentNullException>(() => _userService.RegisterUserAsync(user!));
             Assert.Equal("User model cannot be null. (Parameter 'model')", ex.Message);
         }
