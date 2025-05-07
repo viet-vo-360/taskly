@@ -1,7 +1,7 @@
 USE Taskly
 GO
 
-IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Users')
+IF EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Users')
 BEGIN
 	ALTER TABLE Users
 	ALTER COLUMN Email NVARCHAR(255) COLLATE SQL_Latin1_General_CP1_CI_AS;
