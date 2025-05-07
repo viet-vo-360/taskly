@@ -59,7 +59,7 @@ namespace Taskly.Dashboard.App
 
                 if (!app.Environment.IsDevelopment())
                 {
-                    app.UseExceptionHandler("/User/Error");
+                    app.UseExceptionHandler("/Home/Error");
                     app.UseHsts();
                 }
 
@@ -70,7 +70,7 @@ namespace Taskly.Dashboard.App
 
                 app.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=User}/{action=Register}/{id?}");
+                    pattern: "{controller=Home}/{action=Register}/{id?}");
 
                 app.Run();
             }

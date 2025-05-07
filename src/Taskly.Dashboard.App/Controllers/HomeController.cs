@@ -14,12 +14,12 @@ using Taskly.Users.Models;
 
 namespace Home.Controllers
 {
-    public class UserController : Controller
+    public class HomeController : Controller
     {
         private readonly IUserService _userService;
-        private readonly ILogger<UserController> _logger;
+        private readonly ILogger<HomeController> _logger;
 
-        public UserController(IUserService userService, ILogger<UserController> logger)
+        public HomeController(IUserService userService, ILogger<HomeController> logger)
         {
             _userService = userService;
             _logger = logger;
