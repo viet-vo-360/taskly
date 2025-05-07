@@ -35,11 +35,9 @@ namespace Home.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(User model)
         {
-            _logger.LogInformation("Received registration form submission at {Time}", DateTime.UtcNow);
-
             if (!ModelState.IsValid)
             {
-                _logger.LogWarning("Registration form validation failed at {Time}", DateTime.UtcNow);
+                _logger.LogError("Registration form validation failed at {Time}", DateTime.UtcNow);
                 return View(model);
             }
 
@@ -49,7 +47,7 @@ namespace Home.Controllers
 
                 if (userId == null)
                 {
-                    _logger.LogWarning("User registration failed for email {Email} at {Time}", model.Email, DateTime.UtcNow);
+                    _logger.LogError("User registration failed for email {Email} at {Time}", model.Email, DateTime.UtcNow);
                     ModelState.AddModelError("Email", "Registration failed. Please try again.");
                     return View(model);
                 }
@@ -66,7 +64,7 @@ namespace Home.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogCritical(ex, "Unexpected error during registration for email {Email} at {Time}", model.Email, DateTime.UtcNow);
+                _logger.LogError(ex, "Unexpected error during registration for email {Email} at {Time}", model.Email, DateTime.UtcNow);
                 ModelState.AddModelError("Error", "An unexpected error occurred. Please try again later.");
                 return View(model);
             }
