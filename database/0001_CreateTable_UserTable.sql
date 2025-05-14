@@ -1,5 +1,4 @@
 -- liquibase formatted sql
-
 -- changeset vohuyvu360:0001_CreateTable_UserTable
 IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'Taskly')
 BEGIN
