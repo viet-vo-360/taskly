@@ -14,12 +14,18 @@ namespace Taskly.Dashboard.App
     {
         public static void Main(string[] args)
         {
+            // Load the configuration with different appsettings.json
+            var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
+
+            var configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .AddJsonFile($"appsettings.{environment}.json", optional: true, reloadOnChange: true)
+            .Build();
+
             // Configure Serilog
             Log.Logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(new ConfigurationBuilder()
-                    .AddJsonFile("appsettings.json")
-                    .Build())
-                .Enrich.FromLogContext()
+                .ReadFrom.Configuration(configuration)
                 .CreateLogger();
 
             try

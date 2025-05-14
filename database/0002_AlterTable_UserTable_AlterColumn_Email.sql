@@ -1,3 +1,6 @@
+-- liquibase formatted sql
+
+-- changeset vohuyvu360:0002_UpdateColumn_Email
 USE Taskly
 GO
 
