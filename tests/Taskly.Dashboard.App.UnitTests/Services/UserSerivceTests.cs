@@ -40,7 +40,7 @@ namespace Taskly.Dashboard.App.UnitTests.Services
             // Arrange
             var user = GetSampleUser();
             _mockRepo.Setup(r => r.IsEmailExistsAsync(user.Email)).ReturnsAsync(false);
-            _mockRepo.Setup(r => r.IsPhoneNumberExistsAsync(user.PhoneNumber ?? string.Empty)).ReturnsAsync(false);
+            _mockRepo.Setup(r => r.IsPhoneNumberExistsAsync(user.PhoneNumber)).ReturnsAsync(false);
             _mockRepo.Setup(r => r.RegisterUserAsync(It.IsAny<User>())).ReturnsAsync(1);
 
             // Act
