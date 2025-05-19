@@ -1,0 +1,5 @@
+﻿databaseChangeLog:
+  - includeAll:
+      relativeToChangelogFile: true
+      path: ../../../database
+      splitStatements: true
